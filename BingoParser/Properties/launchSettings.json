@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BingoParser": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
