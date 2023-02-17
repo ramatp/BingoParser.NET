@@ -66,5 +66,9 @@ public sealed class BulkImportClass
         // ReSharper disable once LocalizableElement
         if (!Quiet) Console.WriteLine($"\nPreimportazione versione 6 terminata - inserite {affectedRows} righe.");
         Log.Information($"Preimportazione versione 6 terminata - inserite {affectedRows} righe.");
+        // Eliminazione di eventuali valori NULL
+        const string cleanData = "delete from Misure.Preimport where RValue is null";
+        var deletedRows = db.ExecuteNonQuery(cleanData);
+        Log.Information($"Eliminate {deletedRows} righe con valori null nella misura");
     }
 }

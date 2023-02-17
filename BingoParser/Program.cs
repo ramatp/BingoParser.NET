@@ -120,7 +120,6 @@ public static class Program
         Console.WriteLine();
     }
 
-
     public static void ConvertAllInputFiles() {
         var inputFiles = GetInputFileList(InputDirectory!);
         Log.Information($"Inizio conversione files nella directory {InputDirectory}.");
@@ -170,7 +169,7 @@ public static class Program
     private static void ConvertDBFFile(string file) {
         var tbl = DBF.GetDBFSimple(file);
         var fileName = Path.GetFileNameWithoutExtension(file); // Questo devo cercarlo in PmMap
-        var rTaken = DateTime.Today.Date.ToString("yyyyMMdd");
+        var rTaken = DateTime.Today.Date.ToString("yyyy-MM-dd");
         var sb = new StringBuilder();
         RowsWritten = 0;
         // Ho ottenuto una tabella contenente i dati presenti nel file passato come parametro. A questo punto, devo trasferire i dati dalla tabella
@@ -226,7 +225,7 @@ public static class Program
             line = GetCleanDataRow(line); // Contiene 4 campi gia separati da tab: Channel, GaugeDateTime, RawValue, GaugeValue
             var fieldData = line.Split(new string[] { Separator! }, StringSplitOptions.None).ToList();
             var PdmId = fieldData[0];
-            if (PdmId.IsNullValue() | fieldData[3].IsNullValue()) continue; // GetPm non ha restituito un valore per il codice PdM; non preimporto
+            if (PdmId.IsNullValue() || fieldData[3].IsNullValue()) continue; // GetPm non ha restituito un valore per il codice PdM; non preimporto
 
             var rdt = FormatDateForSql(fieldData[1]);
             if (rdt.IsNullValue()) continue; // scarto le date non valide

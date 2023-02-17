@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# RCS1192: Unnecessary usage of verbatim string literal.
+dotnet_diagnostic.RCS1192.severity = none
